@@ -17,13 +17,13 @@ while (option != 'salir'):
     if option == 'enviar':
         message = input('\nIngrese el mensaje a cifrar: ')
         print("Mensaje original: ", message)
-        cipher_text = EncryptCBC(message.encode('utf-8'), keys[2])
-        print("Mensaje cifrado: ", cipher_text)
+        cipher_text = EncryptCBC(message.encode('utf-8'), keys[0])
+        print("Mensaje cifrado: ", cipher_text[1])
 
     if option == 'recibir':
         mensaje_a_descifrar = input('\nIngrese el mensaje a descifrar: ')
 
-        recovered_message = DecryptCBC(mensaje_a_descifrar,keys[3],keys[4])
+        recovered_message = DecryptCBC(mensaje_a_descifrar,private,cipher_text[0],keys[0][2])
         print("Mensaje recuperado: ", recovered_message)
 
     if option == 'salir':

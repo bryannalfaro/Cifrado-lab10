@@ -78,20 +78,8 @@ def GenerarClaves():
     while gcd(g,p-1)!=1:
         g = np.random.randint(2,p-1)
 
-    h = pow(g,a,p-1)
-    b = np.random.randint(2,p-1)
-    u = pow(g,b)
-    v = pow(h,b)
-    sharedkey = str(u+v)
-    plainText =  sharedkey.encode('utf-8')
-    hashKey = hashlib.sha256(plainText).digest()
-    private = a
-    public = g,h
-    public = str(public).encode('ascii')
-    publickey = base64.b64encode(public).decode()
-    private = str(private).encode('ascii')
-    privatekey = base64.b64encode(private).decode()
-    return publickey,privatekey,hashKey,u,a
+    h = pow(g,a) # g^a
+    return (g,h,p),a
 
 
 def menu():
