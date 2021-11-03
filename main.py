@@ -6,14 +6,18 @@ import base64
 
 #Segunda parte
 
-keys = GenerarClaves()
 
-private = keys[1]
 
 
 option = ''
 while (option != 'salir'):
-    option = input("\nIngrese la opcion: 'enviar', 'recibir' o 'salir': ")
+    option = input("\nIngrese la opcion: 'generar', 'enviar', 'recibir' o 'salir': ")
+    if option=='generar':
+        keys = GenerarClaves()
+
+        private = keys[1]
+        print('llave privada: ',private)
+        print('llave publica con primo generado: ',keys[0])
     if option == 'enviar':
         message = input('\nIngrese el mensaje a cifrar: ')
         print("Mensaje original: ", message)
