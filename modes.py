@@ -5,19 +5,10 @@ from Crypto.Random import get_random_bytes
 import hashlib
 import random
 
-def binpow(a,b):
-    if b==0:
-        return 1
-    result = binpow(a,b//2)
-    if b % 2:
-        return result * result *a
-    else:
-        return result*result
-
 def EncryptCBC(data, key):
-    b = random.randint(2,key[2]-1)
+    b = random.randint(2,key[2]-1) # usa el mismo primo p que las claves generadas
     u = pow(key[0],b) #g^b
-    v = pow(key[1],b,key[2]-1) #g^(a*b)modp-1
+    v = pow(key[1],b,key[2]-1) # g^(a*b)modp-1 <- h^(b) mod p-1
 
     key = (u+v)
     sharedkey = str(key)
@@ -31,9 +22,8 @@ def EncryptCBC(data, key):
     result = ct
     return u,result
 
-def DecryptCBC(result,a, u,p):
-
-    v = pow(u,a,p-1) # g^(b*a)modp-1
+def DecryptCBC(result,a,u,p):
+    v = pow(u,a,p-1) # g^(b*a)modp-1 <- u^(a) mod p-1
 
     sharedkey = str(u+v)
     plainText =  sharedkey.encode('utf-8')

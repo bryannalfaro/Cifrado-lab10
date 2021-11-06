@@ -1,7 +1,4 @@
 import numpy as np
-import random
-import base64
-import hashlib
 
 def gcd(a,b):
     a = abs(a)
@@ -11,26 +8,6 @@ def gcd(a,b):
     else:
         return gcd(b, a%b)
 
-def egcd(a, b):
-    xp  = 0
-    yp = 1
-    if a == 0:
-        return b, xp, yp
-    else:
-        gcd, x, y = egcd(b % a, a)
-        xp = y - (b // a) * x
-        yp = x
-        return gcd,xp, yp
-
-
-def modInverse(a,n):
-
-    g,x,y =egcd(a,n)
-    if(g!=1):
-        return 'No existe inverso'
-    else:
-        res = x%n
-        return res
 def binpow(a,b):
     if b==0:
         return 1
@@ -61,19 +38,17 @@ def generatorPrimes(longitud,cantidad):
         numero = np.random.randint(numb, numb*10-1000)
 
         if testFermat(numero,5)[0]==True:
-
             primos.append(numero)
         else:
             pass
     return primos
+
 def GenerarClaves():
     p = generatorPrimes(4,2)
     p = p[0]
 
     g = np.random.randint(2,p-1)
-
-    a = np.random.randint(2,p-1)
-
+    a = np.random.randint(2,p-1) # privada
 
     while gcd(g,p-1)!=1:
         g = np.random.randint(2,p-1)
@@ -83,10 +58,8 @@ def GenerarClaves():
 
 
 def menu():
-    print("Ingrese la opcion:")
+    print("\nIngrese la opcion:")
     print('1. Generar claves')
     print('2. Encriptar mensaje')
     print('3. Decriptar mensaje')
     print('4. Salir')
-
-
